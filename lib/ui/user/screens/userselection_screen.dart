@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:petcu/screens/login_screen.dart'; // Adjust the import as needed
+import 'package:petcu/ui/user/screens/login_screen.dart'; // Adjust the import as needed
 
 class UserSelectionScreen extends StatefulWidget {
   const UserSelectionScreen({Key? key}) : super(key: key);

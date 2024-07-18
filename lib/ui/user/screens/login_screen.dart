@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:petcu/components/buttons.dart'; 
+import 'package:petcu/components/buttons.dart';
+import 'package:petcu/components/navbar.dart'; 
 import 'package:petcu/components/textfield.dart'; 
-import 'package:petcu/screens/home_screen.dart';
-import 'package:petcu/screens/otp_screen.dart';
-import 'package:petcu/screens/signup_screen.dart';
+import 'package:petcu/ui/user/screens/home_screen.dart';
+import 'package:petcu/ui/user/screens/otp_screen.dart';
+import 'package:petcu/ui/user/screens/signup_screen.dart';
+import 'package:petcu/animation/slide_animation.dart';  // Import the new slide_page_route.dart file
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -85,26 +87,11 @@ class _LoginScreenState extends State<LoginScreen> {
             margin: EdgeInsets.only(left: 180),
             child: TextButton(
               onPressed: () {
-                // PageRouteBuilder(
-                //     pageBuilder: (context, animation, secondaryAnimation) => OtpScreen(),
-                //     transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                //       const begin = Offset(1.0, 0.0);
-                //       const end = Offset.zero;
-                //       const curve = Curves.ease;
-
-                //       var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-
-                //       return SlideTransition(
-                //         position: animation.drive(tween),
-                //         child: child,
-                //       );
-                //     },
-                //   );
-
-                Navigator.push(context, 
-                MaterialPageRoute(builder: (context) => OtpScreen())
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => OtpScreen())
                 );
-                },
+              },
               child: Text(
                 "Forget Password ?",
                 style: GoogleFonts.roboto(
@@ -122,28 +109,14 @@ class _LoginScreenState extends State<LoginScreen> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  PageRouteBuilder(
-                    pageBuilder: (context, animation, secondaryAnimation) => HomeScreen(),
-                    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                      const begin = Offset(1.0, 0.0);
-                      const end = Offset.zero;
-                      const curve = Curves.ease;
-
-                      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-
-                      return SlideTransition(
-                        position: animation.drive(tween),
-                        child: child,
-                      );
-                    },
-                  ),
+                  SlidePageRoute(page: BottomNavbar()),
                 );
               },
             ),
           ),
           SizedBox(height: screenHeight * 0.06),
           Container(
-            margin: EdgeInsets.symmetric(horizontal: 50),
+            margin: EdgeInsets.symmetric(horizontal: 60),
             child: Row(
               children: [
                 Text(
@@ -157,21 +130,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      PageRouteBuilder(
-                        pageBuilder: (context, animation, secondaryAnimation) => SignupScreen(),
-                        transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                          const begin = Offset(1.0, 0.0);
-                          const end = Offset.zero;
-                          const curve = Curves.ease;
-
-                          var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-
-                          return SlideTransition(
-                            position: animation.drive(tween),
-                            child: child,
-                          );
-                        },
-                      ),
+                      SlidePageRoute(page: SignupScreen()),
                     );
                   },
                   child: Text(

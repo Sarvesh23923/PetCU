@@ -1,14 +1,13 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:petcu/components/media&color.dart';
 import 'package:petcu/sheets/onboard_data.dart';
-import 'package:petcu/screens/userselection_screen.dart';
+import 'package:petcu/ui/user/screens/userselection_screen.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnboardScreen extends StatefulWidget {
-  const OnboardScreen({super.key});
+  const OnboardScreen({Key? key}) : super(key: key);
 
   @override
   State<OnboardScreen> createState() => _OnboardScreenState();
@@ -28,8 +27,9 @@ class _OnboardScreenState extends State<OnboardScreen> {
       body: Stack(
         children: [
           Container(
-            margin: EdgeInsets.symmetric(horizontal: 15),
+            margin: EdgeInsets.symmetric(horizontal: 20),
             child: PageView.builder(
+              physics: AlwaysScrollableScrollPhysics(),
               itemCount: controller.items.length,
               controller: pageController,
               onPageChanged: (index) {
@@ -38,30 +38,44 @@ class _OnboardScreenState extends State<OnboardScreen> {
                 });
               },
               itemBuilder: (context, index) {
-                return Column(
-                  children: [
-                    SizedBox(height: screenHeight * 0.08),
-                    SvgPicture.asset(
-                      controller.items[index].image,
-                    ),
-                    SizedBox(height: screenHeight * 0.03),
-                    Text(
-                      controller.items[index].title,
-                      style: GoogleFonts.roboto(
-                        fontSize: screenWidth * 0.05,
-                        fontWeight: FontWeight.w700,
+                return SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      SizedBox(height: screenHeight * 0.1),
+                      Container(
+                        height: screenHeight * 0.55,
+                        decoration: BoxDecoration(
+                          color: primaryColor.withOpacity(0.5),
+                          borderRadius: BorderRadius.circular(20)
+                        ),
+                        child: Center(
+                          child: SvgPicture.asset(
+                            controller.items[index].image,
+                            height: screenHeight * 0.3,
+                            width: screenWidth * 0.8,
+                            fit: BoxFit.contain,
+                          ),
+                        ),
                       ),
-                    ),
-                    SizedBox(height: screenHeight * 0.02),
-                    Text(
-                      controller.items[index].description,
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.roboto(
-                        fontSize: screenWidth * 0.04,
-                        fontWeight: FontWeight.w400,
+                      SizedBox(height: screenHeight * 0.05),
+                      Text(
+                        controller.items[index].title,
+                        style: GoogleFonts.roboto(
+                          fontSize: screenWidth * 0.05,
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
-                    ),
-                  ],
+                      SizedBox(height: screenHeight * 0.02),
+                      Text(
+                        controller.items[index].description,
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.roboto(
+                          fontSize: screenWidth * 0.04,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ],
+                  ),
                 );
               },
             ),
@@ -78,7 +92,8 @@ class _OnboardScreenState extends State<OnboardScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         TextButton(
-                          onPressed: () => pageController.jumpToPage(controller.items.length - 1),
+                          onPressed: () =>
+                              pageController.jumpToPage(controller.items.length - 1),
                           child: Text(
                             "Skip",
                             style: GoogleFonts.roboto(
@@ -88,13 +103,6 @@ class _OnboardScreenState extends State<OnboardScreen> {
                             ),
                           ),
                         ),
-                        // SmoothPageIndicator(
-                        //   controller: pageController,
-                        //   count: controller.items.length,
-                        //   effect: WormEffect(
-                        //     activeDotColor: Color.fromRGBO(217, 127, 44, 1),
-                        //   ),
-                        // ),
                         CircleAvatar(
                           radius: 20.0,
                           backgroundColor: Color.fromRGBO(217, 127, 44, 1),
@@ -123,14 +131,18 @@ class _OnboardScreenState extends State<OnboardScreen> {
                               PageRouteBuilder(
                                 pageBuilder: (context, animation, secondaryAnimation) =>
                                     UserSelectionScreen(),
-                                transitionsBuilder:
-                                    (context, animation, secondaryAnimation, child) {
+                                transitionsBuilder: (
+                                  context,
+                                  animation,
+                                  secondaryAnimation,
+                                  child,
+                                ) {
                                   var begin = 0.0;
                                   var end = 1.0;
                                   var curve = Curves.easeInOut;
 
-                                  var tween =
-                                      Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+                                  var tween = Tween(begin: begin, end: end)
+                                      .chain(CurveTween(curve: curve));
 
                                   return FadeTransition(
                                     opacity: animation.drive(tween),

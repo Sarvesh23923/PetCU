@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:petcu/components/buttons.dart';
 import 'package:petcu/components/textfield.dart';
-import 'package:petcu/screens/login_screen.dart';
-import 'package:petcu/screens/reset_password_screen.dart';
+import 'package:petcu/ui/user/screens/login_screen.dart';
+import 'package:petcu/ui/user/screens/reset_password_screen.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});

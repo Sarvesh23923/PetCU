@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:petcu/components/buttons.dart';
-import 'package:petcu/screens/reset_password_screen.dart';
+import 'package:petcu/ui/user/screens/reset_password_screen.dart';
 import 'package:pinput/pinput.dart';
 import 'package:google_fonts/google_fonts.dart';
 
